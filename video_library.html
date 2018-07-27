@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+</head>
+
+<body>
+    <a-assets>
+        <video id="library" src="https://cdn.glitch.com/0a1854db-2691-4701-91ba-086d725a864c%2Flibrary_video.MP4?1532728216387"></video>
+    </a-assets>
+    <a-scene>
+        <a-sky rotation="0 -90 0" src="#library"></a-sky>
+    </a-scene>
+</body>
+
+<script>
+  window.addEventListener('click', function () {
+    var v = document.querySelector('#library');
+    v.play();
+  });
+</script>
+
+</html>
