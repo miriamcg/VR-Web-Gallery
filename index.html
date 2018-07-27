@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script src="https://npmcdn.com/aframe-animation-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-layout-component@3.0.1"></script>
+    <script src="https://npmcdn.com/aframe-template-component@3.1.1"></script>
+    <script src="https://unpkg.com/aframe-text-geometry-component@0.5.1/dist/aframe-text-geometry-component.min.js"></script>
+    <script src="scripts/set-image.js"></script>
+    <title>First VR Web Project</title>
+</head>
+<body>
+
+    <a-scene>
+
+        <assets>
+
+            <!--Images-->
+            <img id="sky" src="https://cdn.glitch.com/0a1854db-2691-4701-91ba-086d725a864c%2Fsky.jpg?1532726891922" crossorigin="anonymous">
+            <img id="grid" src="https://cdn.glitch.com/0a1854db-2691-4701-91ba-086d725a864c%2Fgrid.png?1532728162611" crossorigin="anonymous">
+            <img id="funpark" src="https://cdn.glitch.com/0a1854db-2691-4701-91ba-086d725a864c%2Fjump.JPG?1532728175583" crossorigin="anonymous">
+            <img id="atlantico" src="https://cdn.glitch.com/0a1854db-2691-4701-91ba-086d725a864c%2Fsea.JPG?1532728169018" crossorigin="anonymous">
+            <img id="biblioteca" src="https://cdn.glitch.com/0a1854db-2691-4701-91ba-086d725a864c%2Flibrary.JPG?1532728170194" crossorigin="anonymous">
+
+            <!--Font-->
+            <a-asset-item id="exoItalicFont" src="https://cdn.glitch.com/c719c986-c0c5-48b8-967c-3cd8b8aa17f3%2Fexo2BlackItalic.typeface.json?1490305922725"></a-asset-item>
+
+            <!--Model and material-->
+            <a-asset-item id="gundam" src="https://cdn.glitch.com/0a1854db-2691-4701-91ba-086d725a864c%2Fgundam.obj?1532728163886" crossorigin="anonymous"></a-asset-item>
+            <a-asset-item id="material" src="https://cdn.glitch.com/0a1854db-2691-4701-91ba-086d725a864c%2Fmaterials.mtl?1532728163466" crossorigin="anonymous"></a-asset-item>
+
+            <!--Layouts-->
+            <img id="stars" src="https://cdn.glitch.com/0a1854db-2691-4701-91ba-086d725a864c%2Fstars.jpg?1532728165131" crossorigin="anonymous">
+            <img id="photo-thumb" src="https://cdn.glitch.com/0a1854db-2691-4701-91ba-086d725a864c%2Fsup_th.jpg?1532728162935" crossorigin="anonymous">
+            <img id="universe" src="https://cdn.glitch.com/0a1854db-2691-4701-91ba-086d725a864c%2Funiverse.jpg?1532728164564" crossorigin="anonymous">
+            <img id="run-thumb" src="https://cdn.glitch.com/0a1854db-2691-4701-91ba-086d725a864c%2Frun_th.jpg?1532728162991" crossorigin="anonymous">
+            <img id="sky-t" src="https://cdn.glitch.com/0a1854db-2691-4701-91ba-086d725a864c%2Fsky.jpg?1532726891922" crossorigin="anonymous" >
+            <img id="sup-thumb" src="https://cdn.glitch.com/0a1854db-2691-4701-91ba-086d725a864c%2Fphoto_th.jpg?1532728162879" crossorigin="anonymous">
+
+            <!--Sound-->
+            <audio id="click-sound" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+
+            <!--Image link-->
+            <script id="link" type="text/html">
+                <a-entity class="link"
+                          geometry="primitive: plane; height: 1; width: 1"
+                          material="shader: flat; src: ${thumb}"
+                          event-set__1="_event: mousedown; scale: 1 1 1"
+                          event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+                          event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+                          event-set__4="_event: mouseleave; scale: 1 1 1"
+                          set-image="on: click; target: #image-360; src: ${src}"
+                          sound="on: click; src: #click-sound">
+                </a-entity>
+            </script>
+        </assets>
+
+        <a-sky id="image-360" src="#sky" rotate ="0 -90 0"></a-sky>
+
+        <a-entity id="opacity" position="-3.5 2 -3" text-geometry="value: Video Gallery; font: #exoItalicFont; style: italic; size: 0.8; weight: bold; height: 0; bevelEnabled: true; bevelSize: 0.04; bevelThickness: 0.04; curveSegments: 1"
+                   material="shader: flat; color: white; transparent: false; opacity: 0.4"></a-entity>
+
+        <a-entity position="-3.5 2 -3" text-geometry="value: Video Gallery; font: #exoItalicFont; style: italic; size: 0.8; weight: bold; height: 0;"
+                  material="shader: flat; color: white"></a-entity>
+
+        <a-entity geometry="primitive: plane; width: 10000; height: 10000;" rotation="-90 0 0"
+                  material="src: #grid; repeat: 10000 10000; transparent: true; metalness:0.6; roughness: 0.4;"></a-entity>
+
+        <!-- Image links -->
+        <a-entity id="links" layout="type: box; columns: 3; margin: 1.5;" position="-1.5 1 -3" visible="false">
+            <a-entity template="src: #link" data-src="#universe" data-thumb="#photo-thumb"></a-entity>
+            <a-entity template="src: #link" data-src="#sky-t" data-thumb="#run-thumb"></a-entity>
+            <a-entity template="src: #link" data-src="#stars" data-thumb="#sup-thumb"></a-entity>
+        </a-entity>
+
+        <!-- Video links -->
+        <a-entity id="video_links">
+            <a-link class="videolink" href="video_jump.html" title="San Telmo" image="#funpark" position="-2 0.5 -3" scale="0.5 0.5 0.5"></a-link>
+            <a-link class="videolink" href="video_sea.html" title="Atlantico" image="#atlantico" position="0 0.5 -3" scale="0.5 0.5 0.5"></a-link>
+            <a-link class="videolink" href="video_library.html" title="Biblioteca" image="#biblioteca" position="2 0.5 -3" scale="0.5 0.5 0.5"></a-link>
+        </a-entity>
+
+        <a-entity obj-model="obj: #gundam; mtl: #material" position="-4.75 2.5 -3" rotation="0 -95.5 0" scale="0.5 0.5 0.5"></a-entity>
+
+        <!-- Lights -->
+        <a-entity light="color: #ccccff; intensity: 1; type: ambient;" visible=""></a-entity>
+        <a-entity light="color: ffaaff; intensity: 0.5" position="5 5 5"></a-entity>
+        <a-entity light="color: white; intensity: 0.5" position="-5 5 15"></a-entity>
+        <a-entity light="color: white; type: ambient;"></a-entity>
+
+        <!-- Camera and cursor -->
+        <a-entity id="camera" camera="active:true" position="0 1.5 1" look-controls wasd-controls="fly: true" data-aframe-default-camera>
+            <a-cursor id="cursor" material="color: springgreen; opacity: 0.7;"
+                      animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+                      animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+                      event-set__1="_event: mouseenter; color: springgreen; opacity: 1;"
+                      event-set__2="_event: mouseleave; color: cyan; opacity: 0.7;"
+                      fuse="true"
+                      raycaster="objects: .link, .activator, .videolink">
+            </a-cursor>
+        </a-entity>
+
+        <!-- Activators -->
+        <a-entity class="activator" id="links-visibility-button-photos" geometry="primitive: box"
+                  material="color: yellow; opacity: 0.7;"
+                  event-set__1="_event: mouseenter; _target: #links; visible: false; position: -1.5 1 1000"
+                  event-set__2="_event: mousedown; _target: #links; visible: true; position: -1.5 1 -3.8"
+                  position="-0.984 -0.02 -2" scale="0.2 0.2 0.2">
+        </a-entity>
+        <a-entity class="activator" id="links-visibility-button-videos" geometry="primitive: box"
+                  material="color: green; opacity: 0.7;"
+                  event-set__1="_event: mouseenter; _target: #video_links; visible: false; position: -1.5 1 1000"
+                  event-set__2="_event: mousedown; _target: #video_links; visible: true; position: 0 0.5 -0.5"
+                  position="0.893 -0.02 -2" scale="0.2 0.2 0.2">
+        </a-entity>
+
+    </a-scene>
+
+</body>
+</html>
